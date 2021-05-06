@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1title: 时间段内的数据不包含最后一天的数据  时间段内的数据不包含最后一天的数据 获取一段时间段内的数据不包含最后一天的数据1.用 StartTme &lt; date &lt; endTime这种方法starttime和endtime 可以不传2 用 between  StartTme   and  endTime这种的starttime和endtime 必须要有  缺一不可但是这2种方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2021/05/06/%E6%97%B6%E9%97%B4%E6%AE%B5%E5%86%85%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%8C%85%E5%90%AB%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%E7%9A%84%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1title: 时间段内的数据不包含最后一天的数据  时间段内的数据不包含最后一天的数据 获取一段时间段内的数据不包含最后一天的数据1.用 StartTme &lt; date &lt; endTime这种方法starttime和endtime 可以不传2 用 between  StartTme   and  endTime这种的starttime和endtime 必须要有  缺一不可但是这2种方">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-06T09:41:30.788Z">
+<meta property="article:modified_time" content="2021-05-06T09:45:20.429Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-时间段内的数据不包含最后一天的数据" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/06/%E6%97%B6%E9%97%B4%E6%AE%B5%E5%86%85%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%8C%85%E5%90%AB%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%E7%9A%84%E6%95%B0%E6%8D%AE/" class="article-date">
+  <time class="dt-published" datetime="2021-05-06T09:41:30.788Z" itemprop="datePublished">2021-05-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title: 时间段内的数据不包含最后一天的数据</span><br></pre></td></tr></table></figure>
+
+<p>时间段内的数据不包含最后一天的数据</p>
+<p>获取一段时间段内的数据不包含最后一天的数据<br>1.用 StartTme &lt; date &lt; endTime<br>这种方法starttime和endtime 可以不传<br>2 用 between  StartTme   and  endTime<br>这种的starttime和endtime 必须要有  缺一不可<br>但是这2种方法都获取不到 endTime 当天的数据 改成&lt;=也不行<br>我自己想的是可以吧endTime的时间加一天  用新的查询<br>public static Date getNextDay(Date date) {<br>         Calendar calendar = Calendar.getInstance();<br>         calendar.setTime(date);<br>         calendar.add(Calendar.DAY_OF_MONTH, +1);//+1今天的时间加一天<br>         date = calendar.getTime();<br>         return date;<br>     }</p>
+<p>自己只能想到这种方法 有好的方法可以回复</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/05/06/%E6%97%B6%E9%97%B4%E6%AE%B5%E5%86%85%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%8C%85%E5%90%AB%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%E7%9A%84%E6%95%B0%E6%8D%AE/" data-id="ckocpf1jf00004t9k4zid3gk1" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/06/%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/05/06/%E6%97%B6%E9%97%B4%E6%AE%B5%E5%86%85%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%8D%E5%8C%85%E5%90%AB%E6%9C%80%E5%90%8E%E4%B8%80%E5%A4%A9%E7%9A%84%E6%95%B0%E6%8D%AE/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2021/05/06/%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
