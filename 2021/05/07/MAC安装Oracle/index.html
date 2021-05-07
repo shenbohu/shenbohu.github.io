@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <title>获取一段时间段内的数据不包含最后一天的数据 [ 我是猪的博客 ]</title>
+  <title>MAC安装Oracle [ 我是猪的博客 ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -55,26 +55,52 @@
 </div>
     </div>
     <div class="container">
-        <h1 class="post-title">获取一段时间段内的数据不包含最后一天的数据</h1>
+        <h1 class="post-title">MAC安装Oracle</h1>
 <article class="post markdown-style">
-  <p>获取一段时间段内的数据不包含最后一天的数据<br>1.用 StartTme &lt; date &lt; endTime<br>这种方法starttime和endtime 可以不传<br>2 用 between  StartTme   and  endTime<br>这种的starttime和endtime 必须要有  缺一不可<br>但是这2种方法都获取不到 endTime 当天的数据 改成&lt;=也不行<br>我自己想的是可以吧endTime的时间加一天  用新的查询</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Date <span class="title">getNextDay</span><span class="params">(Date date)</span> </span>&#123;</span><br><span class="line">         Calendar calendar = Calendar.getInstance();</span><br><span class="line">         calendar.setTime(date);</span><br><span class="line">         calendar.add(Calendar.DAY_OF_MONTH, +<span class="number">1</span>);<span class="comment">//+1今天的时间加一天</span></span><br><span class="line">         date = calendar.getTime();</span><br><span class="line">         <span class="keyword">return</span> date;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+  <p>因为 mac不能在本地安装Oracle  所以把Oracle安装在Docker</p>
+<p>1:安装Docker    </p>
+<p>​       方法一（推荐）：直接下载安装：连接：<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://download.docker.com/mac/stable/Docker.dmg">https://download.docker.com/mac/stable/Docker.dmg</a></p>
+<p>​       方法二： 在终端执行命令安装：brew cask install docker</p>
+<p>2:    打开终端，输入命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
 
-<p>自己只能想到这种方法 有好的方法可以回复</p>
+<p>查看docker版本，看是否安装成功：</p>
+<p>3:启动Docker 安装Oracle </p>
+<p>​     一： 终端  <code>sudo docker search docker-oracle-xe-11g</code>命令，搜索docker远程仓库的镜像</p>
+<p>​     二： 择第一个STAR最多的一个镜像进行安装，拉取镜像命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull deepdiver/docker-oracle-xe-11g</span><br></pre></td></tr></table></figure>
+
+<p>​     三： 安装oracle容器将该镜像转成容器并使用该容器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -d -p 1521:1521 --name oracle11g deepdiver/docker-oracle-xe-11g</span><br></pre></td></tr></table></figure>
+
+<p>4:连接和配置</p>
+<p>​     一： 进入容器内部</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   sudo docker exec -it 你的容器Id(可通过docker ps -a命令获得) /bin/bash</span><br><span class="line">错误：Error response from daemon: Container * is not running</span><br><span class="line">解决办法：sudo docker start 你的容器Id</span><br></pre></td></tr></table></figure>
+
+<p>​     二：通 过sqlplus进入Oracle</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus system/oracle</span><br></pre></td></tr></table></figure>
+
+<p>​     三： 查看数据库用户名和密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select username,password from dba_users;</span><br></pre></td></tr></table></figure>
+
+<p>​     四： 创建新的用户来进行数据库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create user username(用户名) identified by password(密码)</span><br><span class="line">验证：创建成功后为大写</span><br><span class="line">select * from all_users;</span><br></pre></td></tr></table></figure>
+
+<p>五：对用户进行授权：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant connect,resource to STEAFAN(这里需要将用户名大写，否则授权不成功)</span><br></pre></td></tr></table></figure>
+
 
 </article>
 
     <div class="pagenator post-pagenator">
     
     
-        <a class="extend prev post-prev" href="/2021/05/07/RedisTemplate/">上一篇</a>
-    
 
     
     <p>上次更新 2021-05-07</p>
     
     
-        <a class="extend next post-next" href="/2021/05/06/%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1/">下一篇</a>
+        <a class="extend next post-next" href="/2021/05/07/%E6%9C%AA%E5%91%BD%E5%90%8D/">下一篇</a>
     
     </div>
 
@@ -141,7 +167,7 @@
             
             
             
-                © 申博虎 2017 - 2021
+                © 申博虎 2021
             
         </span>
     </div>
