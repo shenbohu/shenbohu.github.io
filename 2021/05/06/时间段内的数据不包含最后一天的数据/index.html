@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <title> [ Hexo ]</title>
+  <title> [ 我是猪的博客 ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -40,7 +40,7 @@
           
           
           
-          <a href="/">Home</a>
+          <a href="/">首页</a>
         
           
           
@@ -48,7 +48,7 @@
           
           
           
-          <a href="/archives">Archives</a>
+          <a href="/archives">归档</a>
         
           
           
@@ -56,7 +56,7 @@
           
           
           
-          <a href="/about">About</a>
+          <a href="/about">关于</a>
         
       </div>
     </div>
@@ -65,10 +65,8 @@
     <div class="container">
         <h1 class="post-title"></h1>
 <article class="post markdown-style">
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title: 时间段内的数据不包含最后一天的数据</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">获取一段时间段内的数据不包含最后一天的数据</span><br><span class="line">1.用 StartTme &lt; date &lt; endTime</span><br><span class="line">这种方法starttime和endtime 可以不传</span><br><span class="line">2 用 between  StartTme   and  endTime</span><br><span class="line">这种的starttime和endtime 必须要有  缺一不可</span><br><span class="line">但是这2种方法都获取不到 endTime 当天的数据 改成&lt;=也不行</span><br><span class="line">我自己想的是可以吧endTime的时间加一天  用新的查询</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line">public static Date getNextDay(Date date) &#123;</span><br><span class="line">         Calendar calendar = Calendar.getInstance();</span><br><span class="line">         calendar.setTime(date);</span><br><span class="line">         calendar.add(Calendar.DAY_OF_MONTH, +1);//+1今天的时间加一天</span><br><span class="line">         date = calendar.getTime();</span><br><span class="line">         return date;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
 
-<p>时间段内的数据不包含最后一天的数据</p>
-<p>获取一段时间段内的数据不包含最后一天的数据<br>1.用 StartTme &lt; date &lt; endTime<br>这种方法starttime和endtime 可以不传<br>2 用 between  StartTme   and  endTime<br>这种的starttime和endtime 必须要有  缺一不可<br>但是这2种方法都获取不到 endTime 当天的数据 改成&lt;=也不行<br>我自己想的是可以吧endTime的时间加一天  用新的查询<br>public static Date getNextDay(Date date) {<br>         Calendar calendar = Calendar.getInstance();<br>         calendar.setTime(date);<br>         calendar.add(Calendar.DAY_OF_MONTH, +1);//+1今天的时间加一天<br>         date = calendar.getTime();<br>         return date;<br>     }</p>
 <p>自己只能想到这种方法 有好的方法可以回复</p>
 
 </article>
@@ -78,10 +76,10 @@
     
 
     
-    <p>last update time 2021-05-06</p>
+    <p>上次更新 2021-05-07</p>
     
     
-        <a class="extend next post-next" href="/2021/05/06/%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1/">next</a>
+        <a class="extend next post-next" href="/2021/05/06/%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1/">下一篇</a>
     
     </div>
 
@@ -148,7 +146,7 @@
             
             
             
-                © John Doe 2017 - 2021
+                © 申博虎 2017 - 2021
             
         </span>
     </div>
