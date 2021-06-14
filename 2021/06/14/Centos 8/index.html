@@ -55,171 +55,53 @@
 </div>
     </div>
     <div class="container">
-        
+        <h1 class="post-title"></h1>
+<article class="post markdown-style">
+  <hr>
+<p>Centos 8 配置</p>
+<hr>
+<h2 id="一-安装JDK1-8"><a href="#一-安装JDK1-8" class="headerlink" title="一.安装JDK1.8"></a>一.安装JDK1.8</h2><p><strong>1、安装方法</strong></p>
+<p>CentOS8上使用 yum 直接安装，环境变量自动配置好</p>
+<p><strong>2、查看是否已安装</strong></p>
+<p>看到下面结果，说明已经安装配置 jdk</p>
+<img src="https://shenbohu.oss-cn-hangzhou.aliyuncs.com/dockerversion.jpg" class="">
 
 
 
-  <div class="article">
-    
-      <div class="article-item">
-        <h2 class="article-item-header">
-          <a href="/2021/06/14/Centos 8/">
-            
-          </a>
-        </h2>
-        <div class="article-item-content">
-          
-            <p>
-Centos 8 配置
+<p><strong>3、卸载</strong></p>
+<p>查看系统是否自带 jdk</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa |grep java</span><br><span class="line">rpm -qa |grep jdk</span><br><span class="line">rpm -qa |grep gcj</span><br></pre></td></tr></table></figure>
 
-一.安装JDK1.81、安装方法
-CentOS8上使用 yum 直接安装，环境变量自动配置好
-2、查看是否已安装
-看到下面结果，说明已经安装配置 jdk
+<p>如果有输出信息，批量卸载系统自带</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep java | xargs rpm -e --nodeps</span><br></pre></td></tr></table></figure>
 
+<p>如果使用 yum 安装的 jdk，请使用下面命令卸载</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y remove java-1.8.0-openjdk-headless.x86_64</span><br></pre></td></tr></table></figure>
 
+<p><strong>4、安装</strong></p>
+<p>4.1 检查 yum 中有没有 java1.8 包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list java-1.8*</span><br></pre></td></tr></table></figure>
 
+<p>4.2 开始安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install java-1.8.0-openjdk* -y</span><br></pre></td></tr></table></figure>
 
-3、卸载
-查看系统是否自带 jdk
-123rpm -qa |grep javarpm -qa |grep jd...</p>
-          
-        </div>
-        <div class="atricle-item-time">
-          
-            <span>
-              2021-06-14
-            </span>
-          
-        </div>
-      </div>
-    
-      <div class="article-item">
-        <h2 class="article-item-header">
-          <a href="/2021/05/07/MAC安装Oracle/">
-            MAC安装Oracle
-          </a>
-        </h2>
-        <div class="article-item-content">
-          
-            <p>因为 mac不能在本地安装Oracle  所以把Oracle安装在Docker
-1:安装Docker    
-​       方法一（推荐）：直接下载安装：连接：https://download.docker.com/mac/stable/Docker.dmg
-​       方法二： 在终端执行命...</p>
-          
-        </div>
-        <div class="atricle-item-time">
-          
-            <span>
-              2021-05-07
-            </span>
-          
-        </div>
-      </div>
-    
-      <div class="article-item">
-        <h2 class="article-item-header">
-          <a href="/2021/05/07/递归生成树形结构菜单/">
-            递归生成树形结构菜单
-          </a>
-        </h2>
-        <div class="article-item-content">
-          
-            <p>1234567891011121314151617181920212223242526272829          public static List&amp;lt;Menu&amp;gt; parseMenuTree(List&amp;lt;Menu&amp;gt; list)&amp;#123;    List&amp;lt;Menu&amp;g...</p>
-          
-        </div>
-        <div class="atricle-item-time">
-          
-            <span>
-              2021-05-07
-            </span>
-          
-        </div>
-      </div>
-    
-      <div class="article-item">
-        <h2 class="article-item-header">
-          <a href="/2021/05/07/RedisTemplate/">
-            RedisTemplate
-          </a>
-        </h2>
-        <div class="article-item-content">
-          
-            <p>RedisTemplate存数据时指定过期时间123456789redisTemplate.opsForValue().set(&amp;quot;key&amp;quot;,&amp;quot;value&amp;quot;,时间单位 int, 时间类型);//时间类型TimeUnit.SECONDS:秒TimeUnit.MIN...</p>
-          
-        </div>
-        <div class="atricle-item-time">
-          
-            <span>
-              2021-05-07
-            </span>
-          
-        </div>
-      </div>
-    
-      <div class="article-item">
-        <h2 class="article-item-header">
-          <a href="/2021/05/07/阿里云短信服务发送短信/">
-            阿里云发送短信
-          </a>
-        </h2>
-        <div class="article-item-content">
-          
-            <p>需要申请的东西：签名  模版
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071pa...</p>
-          
-        </div>
-        <div class="atricle-item-time">
-          
-            <span>
-              2021-05-07
-            </span>
-          
-        </div>
-      </div>
-    
-      <div class="article-item">
-        <h2 class="article-item-header">
-          <a href="/2021/05/07/时间段内的数据不包含最后一天的数据/">
-            获取一段时间段内的数据不包含最后一天的数据
-          </a>
-        </h2>
-        <div class="article-item-content">
-          
-            <p>获取一段时间段内的数据不包含最后一天的数据1.用 StartTme &amp;lt; date &amp;lt; endTime这种方法starttime和endtime 可以不传2 用 between  StartTme   and  endTime这种的starttime和endtime 必须要有  缺一不可但...</p>
-          
-        </div>
-        <div class="atricle-item-time">
-          
-            <span>
-              2021-05-07
-            </span>
-          
-        </div>
-      </div>
-    
-  </div>
+<p>5、验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
 
 
+</article>
 
-    <div class="pagenator">
-    
-        <a class="extend prev-none">上一页</a>
+    <div class="pagenator post-pagenator">
     
     
 
     
-        
-            <span class="extend page-item page-item-select">1</span>
-        
-        
+    <p>上次更新 2021-06-14</p>
     
     
+        <a class="extend next post-next" href="/2021/05/07/MAC%E5%AE%89%E8%A3%85Oracle/">下一篇</a>
     
-        <a class="extend next-none">下一页</a>
-    
-    
-</div>
+    </div>
 
     </div>
     <div class="footer">
