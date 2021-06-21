@@ -58,17 +58,13 @@
         <h1 class="post-title">Centos 8 配置</h1>
 <article class="post markdown-style">
   <h2 id="一：CentOS-8-安装中文支持-需要root账号"><a href="#一：CentOS-8-安装中文支持-需要root账号" class="headerlink" title="一：CentOS 8 安装中文支持 需要root账号"></a>一：CentOS 8 安装中文支持 需要root账号</h2><p>1、在CentOS 8实例中安装中文支持。</p>
-<p>dnf install glibc-langpack-zh.x86_64<br>2、修改CentOS 8实例系统的字符集。</p>
-<p>echo LANG=zh_CN.UTF-8 &gt; /etc/locale.conf<br>3、使字符集立即生效。</p>
+<p>dnf install glibc-langpack-zh.x86_64 2、修改CentOS 8实例系统的字符集。</p>
+<p>echo LANG=zh_CN.UTF-8 &gt; /etc/locale.conf 3、使字符集立即生效。</p>
 <p>source /etc/locale.conf</p>
 <h2 id="二-安装JDK1-8"><a href="#二-安装JDK1-8" class="headerlink" title="二.安装JDK1.8"></a>二.安装JDK1.8</h2><p><strong>1、安装方法</strong></p>
 <p>CentOS8上使用 yum 直接安装，环境变量自动配置好</p>
 <p><strong>2、查看是否已安装</strong></p>
-<p>看到下面结果，说明已经安装配置 jdk</p>
-<img src="https://shenbohu.oss-cn-hangzhou.aliyuncs.com/dockerversion.jpg" class="">
-
-
-
+<p>看到下面结果，说明已经安装配置 jdk <img src="https://shenbohu.oss-cn-hangzhou.aliyuncs.com/dockerversion.jpg" class=""></p>
 <p><strong>3、卸载</strong></p>
 <p>查看系统是否自带 jdk</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa |grep java</span><br><span class="line">rpm -qa |grep jdk</span><br><span class="line">rpm -qa |grep gcj</span><br></pre></td></tr></table></figure>
@@ -89,24 +85,24 @@
 <p>5、验证</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
 
-<h2 id="三：-CentOS-8-安装MySQL-8-0"><a href="#三：-CentOS-8-安装MySQL-8-0" class="headerlink" title="三： CentOS 8 安装MySQL 8.0"></a>三： CentOS 8 安装MySQL 8.0</h2><p>安装MySQL8.0#<br>使用最新的包管理器安装MySQL</p>
+<h2 id="三：-CentOS-8-安装MySQL-8-0"><a href="#三：-CentOS-8-安装MySQL-8-0" class="headerlink" title="三： CentOS 8 安装MySQL 8.0"></a>三： CentOS 8 安装MySQL 8.0</h2><p>安装MySQL8.0# 使用最新的包管理器安装MySQL</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dnf install <span class="variable">@mysql</span></span><br></pre></td></tr></table></figure>
 
-<p>开启启动#<br>安装完成后，运行以下命令来启动MySQL服务并使它在启动时自动启动：</p>
+<p>开启启动# 安装完成后，运行以下命令来启动MySQL服务并使它在启动时自动启动：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable <span class="comment">--now mysqld</span></span><br></pre></td></tr></table></figure>
 
 <p>要检查MySQL服务器是否正在运行，请输入：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status mysqld</span><br></pre></td></tr></table></figure>
 
-<p>添加密码及安全设置#<br>运行mysql_secure_installation脚本，该脚本执行一些与安全性相关的操作并设置MySQL根密码：</p>
+<p>添加密码及安全设置# 运行mysql_secure_installation脚本，该脚本执行一些与安全性相关的操作并设置MySQL根密码：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql_secure_installation</span><br></pre></td></tr></table></figure>
 
 <p>步骤如下：</p>
 <p>要求你配置VALIDATE PASSWORD component（验证密码组件）： 输入y ，回车进入该配置</p>
-<p>选择密码验证策略等级， 我这里选择0 （low），回车<br>输入新密码两次<br>确认是否继续使用提供的密码？输入y ，回车<br>移除匿名用户？ 输入y ，回车<br>不允许root远程登陆？ 我这里需要远程登陆，所以输入n ，回车</p>
+<p>选择密码验证策略等级， 我这里选择0 （low），回车 输入新密码两次 确认是否继续使用提供的密码？输入y ，回车 移除匿名用户？ 输入y ，回车 不允许root远程登陆？ 我这里需要远程登陆，所以输入n ，回车</p>
 <p>移除test数据库？ 输入y ，回车</p>
 <p>重新载入权限表？ 输入y ，回车</p>
-<p>配置远程登陆#<br>如果需要设置root账户远程登陆，上一步骤中，不允许root远程登陆？这一步需要设为n。<br>接下来本机登录MySQL，将root用户的host字段设为’%’，意为接受root所有IP地址的登录请求：<br>本机登录MySQL:</p>
+<p>配置远程登陆# 如果需要设置root账户远程登陆，上一步骤中，不允许root远程登陆？这一步需要设为n。 接下来本机登录MySQL，将root用户的host字段设为’%’，意为接受root所有IP地址的登录请求： 本机登录MySQL:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">-</span>uroot <span class="operator">-</span>p</span><br></pre></td></tr></table></figure>
 
 <p>&lt;上面步骤中设置的密码&gt;<br>回车后即可登录，接下来终端变成了mysql&gt;开头:</p>
@@ -114,14 +110,51 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">update <span class="keyword">user</span> <span class="keyword">set</span> host<span class="operator">=</span><span class="string">&#x27;%&#x27;</span> <span class="keyword">where</span> <span class="keyword">user</span><span class="operator">=</span><span class="string">&#x27;root&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
 
 <p>设置完成后输入exit退出mysql，回到终端shell界面，接着开启系统防火墙的3306端口：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --add-port=3306/tcp --permanent</span><br><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --add-port=3306/tcp --permanent</span><br><span class="line">        sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
 
-<p>关闭MySQL主机查询dns#<br>MySQL会反向解析远程连接地址的dns记录，如果MySQL主机无法连接外网，则dns可能无法解析成功，导致第一次连接MySQL速度很慢，所以在配置中可以关闭该功能。<br>参考文档<br>打开 /etc/my.cnf文件，添加以下配置：</p>
+<p>关闭MySQL主机查询dns# MySQL会反向解析远程连接地址的dns记录，如果MySQL主机无法连接外网，则dns可能无法解析成功，导致第一次连接MySQL速度很慢，所以在配置中可以关闭该功能。 参考文档 打开<br>/etc/my.cnf文件，添加以下配置：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">vim <span class="operator">/</span>etc<span class="operator">/</span>my.cnf 回车 按i编辑</span><br><span class="line"></span><br><span class="line">复制：</span><br><span class="line">[mysqld]</span><br><span class="line"><span class="keyword">skip</span><span class="operator">-</span>name<span class="operator">-</span>resolve</span><br><span class="line"></span><br><span class="line">复制完成  <span class="number">1.</span>按esc键 <span class="number">2.</span>按： <span class="number">3.</span>按wq 保存退出 </span><br></pre></td></tr></table></figure>
 
 <p>重启服务#</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart mysqld</span><br></pre></td></tr></table></figure>
 
+<h2 id="四：-CentOS-8-安装MySQL-8-0（yum方式安装）"><a href="#四：-CentOS-8-安装MySQL-8-0（yum方式安装）" class="headerlink" title="四： CentOS 8 安装MySQL 8.0（yum方式安装）"></a>四： CentOS 8 安装MySQL 8.0（yum方式安装）</h2><p>1；修改yum源为阿里云</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">备份：mv <span class="operator">/</span>etc<span class="operator">/</span>yum.repos.d<span class="operator">/</span>CentOS<span class="operator">-</span>Base.repo <span class="operator">/</span>etc<span class="operator">/</span>yum.repos.d<span class="operator">/</span>CentOS<span class="operator">-</span>Base.repo.backup</span><br><span class="line">修改为阿里云： wget <span class="operator">-</span>O <span class="operator">/</span>etc<span class="operator">/</span>yum.repos.d<span class="operator">/</span>CentOS<span class="operator">-</span>Base.repo http:<span class="operator">/</span><span class="operator">/</span>mirrors.aliyun.com<span class="operator">/</span>repo<span class="operator">/</span>Centos<span class="number">-8.</span>repo</span><br></pre></td></tr></table></figure>
+
+<p>2：添加EPEL仓库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#添加EPEL仓库</span><br><span class="line">sudo yum install epel<span class="operator">-</span><span class="keyword">release</span></span><br><span class="line"></span><br><span class="line">#更新yum源</span><br><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
+
+<p>3： 安装</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install redis</span><br></pre></td></tr></table></figure>
+
+<p>4：启动</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="keyword">start</span> redis</span><br></pre></td></tr></table></figure>
+
+<p>5：设置开机自启</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable redis</span><br></pre></td></tr></table></figure>
+
+<p>6： 修改配置（配置密码和远程连接）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">打开<span class="operator">/</span>etc<span class="operator">/</span>redis.conf文件</span><br><span class="line">vim <span class="operator">/</span>etc<span class="operator">/</span>redis.conf</span><br><span class="line"></span><br><span class="line">允许远程连接</span><br><span class="line">找到 bind <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> 改成  bind <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span> </span><br><span class="line">找到protected<span class="operator">-</span>mode设置为<span class="keyword">no</span>  protected<span class="operator">-</span>mode <span class="keyword">no</span></span><br><span class="line"></span><br><span class="line">启用密码</span><br><span class="line">找到# requirepass foobared一行，删除前面的#注释，然后将foobared改为你自己的密码</span><br><span class="line">requirepass 你的密码</span><br><span class="line"></span><br><span class="line">保存etc<span class="operator">/</span>redis.conf文件</span><br><span class="line"></span><br><span class="line">注意防火墙端口的开放</span><br></pre></td></tr></table></figure>
+
+<p>7、重启redis</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart redis</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">常见命令介绍</span><br><span class="line">systemctl <span class="keyword">start</span> redis #启动服务</span><br><span class="line">systemctl stop redis #停止服务</span><br><span class="line">systemctl restart redis #重启服务</span><br><span class="line">systemctl status redis #查看服务状态</span><br><span class="line">systemctl enable redis #设置开机自启动</span><br><span class="line">ps <span class="operator">-</span>ef <span class="operator">|</span> grep redis  #查看redis进程</span><br><span class="line">netstat <span class="operator">-</span>lnp<span class="operator">|</span>grep <span class="number">6379</span> #查看端口</span><br></pre></td></tr></table></figure>
+
+<h2 id="五：-centos8-安装-mongodb-4-2-使用yum"><a href="#五：-centos8-安装-mongodb-4-2-使用yum" class="headerlink" title="五： centos8 安装 mongodb 4.2 (使用yum)"></a>五： centos8 安装 mongodb 4.2 (使用yum)</h2><p>1:使用 vim 创建repo文件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim <span class="operator">/</span>etc<span class="operator">/</span>yum.repos.d<span class="operator">/</span>mongodb<span class="operator">-</span>org<span class="number">-4.3</span>.repo</span><br></pre></td></tr></table></figure>
+
+<p>2:输入如下配置到repo文件，然后esc、:wq,保存，退出vim</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[mongodb<span class="operator">-</span>org<span class="number">-4.3</span>]</span><br><span class="line">name<span class="operator">=</span>MongoDB Repository</span><br><span class="line">baseurl<span class="operator">=</span>https:<span class="operator">/</span><span class="operator">/</span>repo.mongodb.org<span class="operator">/</span>yum<span class="operator">/</span>redhat<span class="operator">/</span><span class="number">7</span><span class="operator">/</span>mongodb<span class="operator">-</span>org<span class="operator">/</span><span class="number">4.2</span><span class="operator">/</span>x86_64<span class="operator">/</span></span><br><span class="line">gpgcheck<span class="operator">=</span><span class="number">1</span></span><br><span class="line">enabled<span class="operator">=</span><span class="number">1</span></span><br><span class="line">gpgkey<span class="operator">=</span>https:<span class="operator">/</span><span class="operator">/</span>www.mongodb.org<span class="operator">/</span><span class="keyword">static</span><span class="operator">/</span>pgp<span class="operator">/</span>server<span class="number">-4.2</span>.<span class="keyword">asc</span></span><br></pre></td></tr></table></figure>
+
+<p>3:使用yum 命令安装</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install <span class="operator">-</span>y mongodb<span class="operator">-</span>org </span><br></pre></td></tr></table></figure>
+
+<p>4:启动mongodb</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mongod <span class="keyword">start</span>、stop、restart</span><br></pre></td></tr></table></figure>
+
+<p>5:开放 mongodb 的远程连接 sudo vim /etc/mongod.conf 如果要开放远程访问需要修改该文件的 bindIp值为: 0.0.0.0 ，否则通过其它电脑是连接不到的。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mongod restart</span><br></pre></td></tr></table></figure>
 
 </article>
 
@@ -130,7 +163,7 @@
     
 
     
-    <p>上次更新 2021-06-14</p>
+    <p>上次更新 2021-06-21</p>
     
     
         <a class="extend next post-next" href="/2021/05/07/MAC%E5%AE%89%E8%A3%85Oracle/">下一篇</a>
