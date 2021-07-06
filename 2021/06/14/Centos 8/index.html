@@ -118,7 +118,7 @@
 <p>重启服务#</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart mysqld</span><br></pre></td></tr></table></figure>
 
-<h2 id="四：-CentOS-8-安装MySQL-8-0（yum方式安装）"><a href="#四：-CentOS-8-安装MySQL-8-0（yum方式安装）" class="headerlink" title="四： CentOS 8 安装MySQL 8.0（yum方式安装）"></a>四： CentOS 8 安装MySQL 8.0（yum方式安装）</h2><p>1；修改yum源为阿里云</p>
+<h2 id="四：-CentOS-8-安装redis（yum方式安装）"><a href="#四：-CentOS-8-安装redis（yum方式安装）" class="headerlink" title="四： CentOS 8 安装redis（yum方式安装）"></a>四： CentOS 8 安装redis（yum方式安装）</h2><p>1；修改yum源为阿里云</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">备份：mv <span class="operator">/</span>etc<span class="operator">/</span>yum.repos.d<span class="operator">/</span>CentOS<span class="operator">-</span>Base.repo <span class="operator">/</span>etc<span class="operator">/</span>yum.repos.d<span class="operator">/</span>CentOS<span class="operator">-</span>Base.repo.backup</span><br><span class="line">修改为阿里云： wget <span class="operator">-</span>O <span class="operator">/</span>etc<span class="operator">/</span>yum.repos.d<span class="operator">/</span>CentOS<span class="operator">-</span>Base.repo http:<span class="operator">/</span><span class="operator">/</span>mirrors.aliyun.com<span class="operator">/</span>repo<span class="operator">/</span>Centos<span class="number">-8.</span>repo</span><br></pre></td></tr></table></figure>
 
 <p>2：添加EPEL仓库</p>
@@ -163,7 +163,7 @@
     
 
     
-    <p>上次更新 2021-06-21</p>
+    <p>上次更新 2021-07-06</p>
     
     
         <a class="extend next post-next" href="/2021/05/07/MAC%E5%AE%89%E8%A3%85Oracle/">下一篇</a>
