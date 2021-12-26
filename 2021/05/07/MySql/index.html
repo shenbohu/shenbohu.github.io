@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <title>Archives: 2021 [ 我是猪的博客 ]</title>
+  <title>MySql [ 我是猪的博客 ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -55,73 +55,31 @@
 </div>
     </div>
     <div class="container">
-        <div class="article">
-      
+        <h1 class="post-title">MySql</h1>
+<article class="post markdown-style">
+  <h2 id="1-MySql-varcher-最大值"><a href="#1-MySql-varcher-最大值" class="headerlink" title="1.MySql varcher  最大值"></a>1.MySql varcher  最大值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>使用<span class="built_in">MAX</span>()查询一个字符串类型的字段时,那么比较的实际是字符的ASCII码,比较的时候是一个字母一个字母依次往后比较  </span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(<span class="built_in">CAST</span>(<span class="keyword">no</span> <span class="keyword">AS</span> SIGNED)) <span class="keyword">FROM</span> sys_user   <span class="operator">/</span><span class="operator">/</span> <span class="keyword">no</span> 代表的是具体的字段  <span class="keyword">as</span>  signed   是固定的写法</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(<span class="keyword">no</span> <span class="operator">+</span> <span class="number">0</span> ) <span class="keyword">FROM</span> sys_user   <span class="operator">/</span><span class="operator">/</span>加<span class="number">1</span>的话查询下的最大值加<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-【MySQL】查询保持IN中的顺序"><a href="#2-【MySQL】查询保持IN中的顺序" class="headerlink" title="2.【MySQL】查询保持IN中的顺序"></a>2.【MySQL】查询保持IN中的顺序</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * <span class="function">from table_name where id <span class="title">in</span> <span class="params">()</span>的时候，MySQL会自动按主键自增排序</span></span><br><span class="line"><span class="function">SELECT * from `models` where `id` <span class="title">in</span> <span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span> order by <span class="title">field</span><span class="params">(id,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span></span>;   <span class="comment">//会按照in顺序显示</span></span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+</article>
+
+    <div class="pagenator post-pagenator">
     
-      <div class="year-list">
-        <h3>2021</h3>
-        <ul>
-          
-            <li >
-              <time>2021-06-14</time>
-              <a href="/2021/06/14/Centos 8/">
-                Centos 8 配置
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/MAC安装Oracle/">
-                MAC安装Oracle
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/递归生成树形结构菜单/">
-                递归生成树形结构菜单
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/RestTemplateConfig/">
-                RestTemplateConfig
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/RedisTemplate/">
-                RedisTemplate
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/MySql/">
-                MySql
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/阿里云短信服务发送短信/">
-                阿里云发送短信
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/时间段内的数据不包含最后一天的数据/">
-                获取一段时间段内的数据不包含最后一天的数据
-              </a>
-            </li>
-          
-        </ul>
-      </div>
-     
-</div>
+    
+        <a class="extend prev post-prev" href="/2021/05/07/%E9%80%92%E5%BD%92%E7%94%9F%E6%88%90%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E8%8F%9C%E5%8D%95/">上一篇</a>
+    
+
+    
+    <p>上次更新 2021-12-26</p>
+    
+    
+        <a class="extend next post-next" href="/2021/05/07/RedisTemplate/">下一篇</a>
+    
+    </div>
+
     </div>
     <div class="footer">
         <div class="container">
