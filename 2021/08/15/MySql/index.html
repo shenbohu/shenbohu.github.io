@@ -57,16 +57,7 @@
     <div class="container">
         <h1 class="post-title">MySql</h1>
 <article class="post markdown-style">
-  <hr>
-<p>title: MySql<br>date: 2021-08-15 08:15:16<br>description: 摘要<br>categories:</p>
-<ul>
-<li>MySql</li>
-<li>主从复制<br>tags:</li>
-<li>标签1</li>
-<li>标签2</li>
-</ul>
-<hr>
-<h2 id="1-MySql-varcher-最大值"><a href="#1-MySql-varcher-最大值" class="headerlink" title="1.MySql varcher  最大值"></a>1.MySql varcher  最大值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>使用<span class="built_in">MAX</span>()查询一个字符串类型的字段时,那么比较的实际是字符的ASCII码,比较的时候是一个字母一个字母依次往后比较  </span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(<span class="built_in">CAST</span>(<span class="keyword">no</span> <span class="keyword">AS</span> SIGNED)) <span class="keyword">FROM</span> sys_user   <span class="operator">/</span><span class="operator">/</span> <span class="keyword">no</span> 代表的是具体的字段  <span class="keyword">as</span>  signed   是固定的写法</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(<span class="keyword">no</span> <span class="operator">+</span> <span class="number">0</span> ) <span class="keyword">FROM</span> sys_user   <span class="operator">/</span><span class="operator">/</span>加<span class="number">1</span>的话查询下的最大值加<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  <h2 id="1-MySql-varcher-最大值"><a href="#1-MySql-varcher-最大值" class="headerlink" title="1.MySql varcher  最大值"></a>1.MySql varcher  最大值</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span>使用<span class="built_in">MAX</span>()查询一个字符串类型的字段时,那么比较的实际是字符的ASCII码,比较的时候是一个字母一个字母依次往后比较  </span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(<span class="built_in">CAST</span>(<span class="keyword">no</span> <span class="keyword">AS</span> SIGNED)) <span class="keyword">FROM</span> sys_user   <span class="operator">/</span><span class="operator">/</span> <span class="keyword">no</span> 代表的是具体的字段  <span class="keyword">as</span>  signed   是固定的写法</span><br><span class="line"><span class="keyword">SELECT</span> <span class="built_in">MAX</span>(<span class="keyword">no</span> <span class="operator">+</span> <span class="number">0</span> ) <span class="keyword">FROM</span> sys_user   <span class="operator">/</span><span class="operator">/</span>加<span class="number">1</span>的话查询下的最大值加<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
