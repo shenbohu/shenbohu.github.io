@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <title>Archives: 2021 [ 我是猪的博客 ]</title>
+  <title>获取一段时间段内的数据不包含最后一天的数据 [ 我是猪的博客 ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -55,87 +55,29 @@
 </div>
     </div>
     <div class="container">
-        <div class="article">
-      
+        <h1 class="post-title">获取一段时间段内的数据不包含最后一天的数据</h1>
+<article class="post markdown-style">
+  <p>获取一段时间段内的数据不包含最后一天的数据<br>1.用 StartTme &lt; date &lt; endTime<br>这种方法starttime和endtime 可以不传<br>2 用 between  StartTme   and  endTime<br>这种的starttime和endtime 必须要有  缺一不可<br>但是这2种方法都获取不到 endTime 当天的数据 改成&lt;=也不行<br>我自己想的是可以吧endTime的时间加一天  用新的查询</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Date <span class="title">getNextDay</span><span class="params">(Date date)</span> </span>&#123;</span><br><span class="line">         Calendar calendar = Calendar.getInstance();</span><br><span class="line">         calendar.setTime(date);</span><br><span class="line">         calendar.add(Calendar.DAY_OF_MONTH, +<span class="number">1</span>);<span class="comment">//+1今天的时间加一天</span></span><br><span class="line">         date = calendar.getTime();</span><br><span class="line">         <span class="keyword">return</span> date;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<p>自己只能想到这种方法 有好的方法可以回复</p>
+
+</article>
+
+    <div class="pagenator post-pagenator">
     
-      <div class="year-list">
-        <h3>2021</h3>
-        <ul>
-          
-            <li >
-              <time>2021-08-15</time>
-              <a href="/2021/08/15/阿里云短信服务发送短信/">
-                阿里云发送短信
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-08-15</time>
-              <a href="/2021/08/15/递归生成树形结构菜单/">
-                递归生成树形结构菜单
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-08-15</time>
-              <a href="/2021/08/15/时间段内的数据不包含最后一天的数据/">
-                获取一段时间段内的数据不包含最后一天的数据
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-08-15</time>
-              <a href="/2021/08/15/RedisTemplate/">
-                RedisTemplate
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-08-15</time>
-              <a href="/2021/08/15/MySql/">
-                MySql
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-08-15</time>
-              <a href="/2021/08/15/Centos 8/">
-                Centos 8 配置
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/MAC安装Oracle/">
-                MAC安装Oracle
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/RestTemplateConfig/">
-                RestTemplateConfig
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/seata/">
-                seata14.1分布式
-              </a>
-            </li>
-          
-            <li >
-              <time>2021-05-07</time>
-              <a href="/2021/05/07/MacHexo/">
-                untitled
-              </a>
-            </li>
-          
-        </ul>
-      </div>
-     
-</div>
+    
+        <a class="extend prev post-prev" href="/2021/08/15/RedisTemplate/">上一篇</a>
+    
+
+    
+    <p>上次更新 2022-02-22</p>
+    
+    
+        <a class="extend next post-next" href="/2021/08/15/%E9%80%92%E5%BD%92%E7%94%9F%E6%88%90%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E8%8F%9C%E5%8D%95/">下一篇</a>
+    
+    </div>
+
     </div>
     <div class="footer">
         <div class="container">

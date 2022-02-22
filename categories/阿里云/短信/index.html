@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <title>递归生成树形结构菜单 [ 我是猪的博客 ]</title>
+  <title>Category: 短信 [ 我是猪的博客 ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -55,26 +55,24 @@
 </div>
     </div>
     <div class="container">
-        <h1 class="post-title">递归生成树形结构菜单</h1>
-<article class="post markdown-style">
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Menu&gt; <span class="title">parseMenuTree</span><span class="params">(List&lt;Menu&gt; list)</span></span>&#123;</span><br><span class="line">    List&lt;Menu&gt; result = <span class="keyword">new</span> ArrayList&lt;Menu&gt;();</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 1、获取第一级节点</span></span><br><span class="line">    <span class="keyword">for</span> (Menu menu : list) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == menu.getPid()) &#123;</span><br><span class="line">	    result.add(menu);</span><br><span class="line">	&#125;	</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">// 2、递归获取子节点</span></span><br><span class="line">    <span class="keyword">for</span> (Menu parent : result) &#123;</span><br><span class="line">	parent = recursiveTree(parent, list);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Menu <span class="title">recursiveTree</span><span class="params">(Menu parent, List&lt;Menu&gt; list)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (Menu menu : list) &#123;</span><br><span class="line">        <span class="keyword">if</span>(Objects.equals(parent.getId(),menu.getPid())) &#123;</span><br><span class="line">	    menu = recursiveTree(menu, list);</span><br><span class="line">	    parent.getChildren().add(menu);</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">	    </span><br><span class="line">    <span class="keyword">return</span> parent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</article>
-
-    <div class="pagenator post-pagenator">
-    
-    
-        <a class="extend prev post-prev" href="/2021/05/07/MAC%E5%AE%89%E8%A3%85Oracle/">上一篇</a>
-    
-
-    
-    <p>上次更新 2021-05-07</p>
-    
-    
-        <a class="extend next post-next" href="/2021/05/07/RestTemplateConfig/">下一篇</a>
-    
+        
+<div id="category">
+  <h1>短信</h1>
+  
+    <div class="category-item">
+      
+        <a href="/2021/08/15/%E9%98%BF%E9%87%8C%E4%BA%91%E7%9F%AD%E4%BF%A1%E6%9C%8D%E5%8A%A1%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1/">
+          阿里云发送短信
+        </a>
+      
+      <time datetime="2021-08-15T00:15:16.000Z">
+        2021-08-15
+      </time>
     </div>
+  
+</div>
+
+
 
     </div>
     <div class="footer">

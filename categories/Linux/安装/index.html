@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <title>RedisTemplate [ 我是猪的博客 ]</title>
+  <title>Category: 安装 [ 我是猪的博客 ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -55,29 +55,24 @@
 </div>
     </div>
     <div class="container">
-        <h1 class="post-title">RedisTemplate</h1>
-<article class="post markdown-style">
-  <h2 id="RedisTemplate存数据时指定过期时间"><a href="#RedisTemplate存数据时指定过期时间" class="headerlink" title="RedisTemplate存数据时指定过期时间"></a>RedisTemplate存数据时指定过期时间</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">redisTemplate.opsForValue().set(<span class="string">&quot;key&quot;</span>,<span class="string">&quot;value&quot;</span>,时间单位 <span class="keyword">int</span>, 时间类型);</span><br><span class="line"><span class="comment">//时间类型</span></span><br><span class="line">TimeUnit.SECONDS:秒</span><br><span class="line">TimeUnit.MINUTES：分</span><br><span class="line">TimeUnit.HOURS：时</span><br><span class="line">TimeUnit.DAYS：日</span><br><span class="line">TimeUnit.MILLISECONDS：毫秒</span><br><span class="line">TimeUnit.MILLISECONDS：微秒</span><br><span class="line">TimeUnit.NANOSECONDS：纳秒</span><br></pre></td></tr></table></figure>
-
-<h2 id="Redis常用的数据类型"><a href="#Redis常用的数据类型" class="headerlink" title="Redis常用的数据类型"></a>Redis常用的数据类型</h2><ol>
-<li><h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">redisTemplate.hasKey(key)   <span class="comment">//判断是否有key所对应的值，有则返回true，没有则返回false</span></span><br><span class="line">redisTemplate.opsForValue().get(key)  <span class="comment">//有则取出key值所对应的值</span></span><br><span class="line">redisTemplate.delete(key) <span class="comment">//删除单个key值</span></span><br><span class="line">redisTemplate.delete(keys) <span class="comment">//其中keys:Collection&lt;K&gt; keys   批量删除key</span></span><br><span class="line">redisTemplate.randomKey()  <span class="comment">//从redis中随机取出一个key</span></span><br><span class="line">redisTemplate.opsForValue().set(key, value) <span class="comment">//设置当前的key以及value值  </span></span><br></pre></td></tr></table></figure></li>
-</ol>
-
-</article>
-
-    <div class="pagenator post-pagenator">
-    
-    
-        <a class="extend prev post-prev" href="/2021/05/07/MySql/">上一篇</a>
-    
-
-    
-    <p>上次更新 2021-05-07</p>
-    
-    
-        <a class="extend next post-next" href="/2021/05/07/seata/">下一篇</a>
-    
+        
+<div id="category">
+  <h1>安装</h1>
+  
+    <div class="category-item">
+      
+        <a href="/2021/08/15/Centos%208/">
+          Centos 8 配置
+        </a>
+      
+      <time datetime="2021-08-15T00:15:16.000Z">
+        2021-08-15
+      </time>
     </div>
+  
+</div>
+
+
 
     </div>
     <div class="footer">
