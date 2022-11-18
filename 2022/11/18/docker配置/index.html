@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+  <title>docker配置 [ 我是猪的博客 ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/iLiKE.css">
+    
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+    <script id="leancloud">
+      AV.init({
+          appId: "6E5zTbTljdUbVW2WkXPsXGJk-gzGzoHsz",
+          appKey: "0vsyDKfNpeSECAI70J794ugv"
+      });
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="header">
+        <div class="container">
+    <div class="menu">
+      <div class="menu-left">
+        <a href="/">
+          <img src="/favicon.ico"></img>
+        </a>
+      </div>
+      <div class="menu-right">
+        
+          
+          
+          
+          
+          
+          
+          <a href="/">首页</a>
+        
+          
+          
+          
+          
+          
+          
+          <a href="/archives">归档</a>
+        
+      </div>
+    </div>
+</div>
+    </div>
+    <div class="container">
+        <h1 class="post-title">docker配置</h1>
+<article class="post markdown-style">
+  <h2 id="配置镜像加速"><a href="#配置镜像加速" class="headerlink" title="配置镜像加速"></a>配置镜像加速</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">创建daemon.json文件     touch daemon.json</span><br><span class="line"><span class="comment">//直接执行</span></span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://xxx.mirror.aliyuncs.com&quot;</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF </span><br><span class="line"><span class="comment">//刷新配置重启</span></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker  </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">命令</span><br><span class="line">docker images   查询镜像</span><br><span class="line">docker rmi   镜像id删除镜像</span><br><span class="line">docker ps 查看启动的容器</span><br><span class="line">docker ps -a 查看全部</span><br><span class="line">docker rm 容器id  删除</span><br><span class="line">docker search redis  查看可用版本</span><br><span class="line">docker images | grep seata*  模糊查询镜像</span><br><span class="line">docker stop nacos   <span class="comment">//停止  </span></span><br><span class="line">docker restart nacos 重启</span><br><span class="line">docker exec -it 容器id /bin/bash</span><br><span class="line">docker inspect --format=&#x27;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&#x27; <span class="number">8</span>d16564ded0e   查看容器的ip</span><br><span class="line">sudo docker network ls </span><br><span class="line">sudo docker inspect bridge   查询docker的网络</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">:w            - 保存文件，不退出 vim</span><br><span class="line">:w file  -将修改另外保存到 file 中，不退出 vim</span><br><span class="line">:w!          -强制保存，不退出 vim</span><br><span class="line">:wq          -保存文件，退出 vim</span><br><span class="line">:wq!        -强制保存文件，退出 vim</span><br><span class="line">:q            -不保存文件，退出 vim</span><br><span class="line">:q!          -不保存文件，强制退出 vim</span><br><span class="line">:e!          -放弃所有修改，从上次保存文件开始再编辑  </span><br><span class="line">pwd 查看位置</span><br><span class="line"></span><br><span class="line">在使用docker容器时，有可能没有安装Vi，安装Vi:apt-get install vim，</span><br><span class="line">如果提示：Unable to locate package vim，则需要敲：apt-get update</span><br><span class="line">等更新完毕以后再敲命令： apt-get install vim</span><br><span class="line"></span><br><span class="line">容器未启动  进入容器目录</span><br><span class="line">docker inspect [CONTAINER ID]</span><br><span class="line">MergedDir</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="一：docker安装jdk"><a href="#一：docker安装jdk" class="headerlink" title="一：docker安装jdk"></a>一：docker安装jdk</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>:docker pull primetoninc/jdk:<span class="number">1.8</span></span><br><span class="line"><span class="number">2</span>:启动容器</span><br><span class="line"> docker run -it --name jdk1<span class="number">.8</span> -d primetoninc/jdk:<span class="number">1.8</span>   </span><br><span class="line"> 其中，--name=后的jdk1<span class="number">.8</span>是为容器指定了一个别名，而最后的primetoninc/jdk:<span class="number">1.8</span>那个指的是下载镜像时的名称。）该命  令的意思为：使用docker镜像primetoninc/jdk:<span class="number">1.8</span>以后台模式启动一个容器,并将容器命名为jdk1<span class="number">.8</span> </span><br><span class="line"><span class="number">3</span>：查看安装是否正确</span><br><span class="line"> sudo docker exec -it jdk1<span class="number">.8</span> /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h2 id="二：docker安装mysql"><a href="#二：docker安装mysql" class="headerlink" title="二：docker安装mysql"></a>二：docker安装mysql</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>:docker pull mysql:<span class="number">8.0</span><span class="number">.31</span>    <span class="comment">//docker pull mysql:latest  下载最新</span></span><br><span class="line"><span class="number">2</span>:启动容器 </span><br><span class="line">-p <span class="number">3306</span>:<span class="number">3306</span> ：映射容器服务的 <span class="number">3306</span> 端口到宿主机的 <span class="number">3306</span> 端口，外部主机可以直接通过 宿主机ip:<span class="number">3306</span> 访问到 MySQL 的服务。MYSQL_ROOT_PASSWORD=root密码：设置 MySQL 服务 root 用户的密码。</span><br><span class="line"></span><br><span class="line">docker run -itd --name mysql -p <span class="number">3306</span>:<span class="number">3306</span> -e MYSQL_ROOT_PASSWORD=bohu0812 mysql:<span class="number">8.0</span><span class="number">.31</span></span><br><span class="line"><span class="number">3</span>：进入MySQL容器（登录）</span><br><span class="line">sudo docker exec -it mysql /bin/bash</span><br><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<h2 id="三：redis"><a href="#三：redis" class="headerlink" title="三：redis"></a>三：redis</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1： docker pull redis:latest  安装最新</span><br><span class="line">2:docker run -itd --name redis-test -p 6379:6379 redis</span><br><span class="line">3：进入redisdocker exec -it redis-test /bin/bashredis-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="四：MongoDB"><a href="#四：MongoDB" class="headerlink" title="四：MongoDB"></a>四：MongoDB</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>：docker pull mongo:latest</span><br><span class="line"><span class="number">2</span>：启动容器</span><br><span class="line">docker run -itd --name mongo -p <span class="number">27017</span>:<span class="number">27017</span> mongo --auth</span><br><span class="line">-p <span class="number">27017</span>:<span class="number">27017</span>映射容器服务的<span class="number">27017</span>端口到宿主机的<span class="number">27017</span>端口.外部可以直接通过 宿主机ip:<span class="number">27017</span>访问到mongo 的服务。</span><br><span class="line"><span class="number">3</span>：添加用户设置密码</span><br><span class="line">docker exec -it mongo mongo admin</span><br><span class="line"><span class="number">4</span>：# 创建一个名为 admin，密码为 bohu0812 的用户。</span><br><span class="line">&gt;  db.createUser(&#123; user:<span class="string">&#x27;admin&#x27;</span>,pwd:<span class="string">&#x27;bohu02&#x27;</span>,roles:[ &#123; role:<span class="string">&#x27;userAdminAnyDatabase&#x27;</span>, db: <span class="string">&#x27;admin&#x27;</span>&#125;,<span class="string">&quot;readWriteAnyDatabase&quot;</span>]&#125;);</span><br><span class="line"># 尝试使用上面创建的用户信息进行连接。</span><br><span class="line"><span class="number">5</span>：对admin进行身份认证</span><br><span class="line">&gt; db.auth(<span class="string">&#x27;admin&#x27;</span>, <span class="string">&#x27;bohu0812&#x27;</span>)</span><br><span class="line"><span class="number">6</span>:链接navicat  查看显示隐藏的项目</span><br></pre></td></tr></table></figure>
+
+<h2 id="五：nacos-单机模式"><a href="#五：nacos-单机模式" class="headerlink" title="五：nacos 单机模式"></a>五：nacos 单机模式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>：docker search nacos  # nacos/nacos-server   查找镜像</span><br><span class="line"><span class="number">2</span>：docker pull nacos/nacos-server:v2<span class="number">.1</span><span class="number">.2</span>   下载</span><br><span class="line"><span class="number">3</span>：创建数据库  导入nacos配置表（nacos内置数据源不需要修改）</span><br><span class="line"><span class="number">4</span>：创建容器并启动</span><br><span class="line">	docker run \  </span><br><span class="line">    --name nacos \</span><br><span class="line">    -d \</span><br><span class="line">    -p <span class="number">8848</span>:<span class="number">8848</span> \</span><br><span class="line">    --restart=always \</span><br><span class="line">    -e JVM_XMS=256m \</span><br><span class="line">    -e JVM_XMX=256m \</span><br><span class="line">    -e MODE=standalone \</span><br><span class="line">    nacos/nacos-server:v2<span class="number">.1</span><span class="number">.2</span></span><br><span class="line"> <span class="number">5</span>：进入nacos容器   </span><br><span class="line"> docker exec -it 容器id /bin/bash</span><br><span class="line"> <span class="number">6</span>：修改nacos（nacos内置数据源不需要修改）</span><br><span class="line"> vi ./conf/application.properties   <span class="comment">//打开配置文件</span></span><br><span class="line"> 添加以下配置		</span><br><span class="line">spring.datasource.platform=mysql</span><br><span class="line">db.num=<span class="number">1</span></span><br><span class="line">db.url<span class="number">.0</span>=jdbc:mysql:<span class="comment">//127.0.0.1:3306/nacos?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true&amp;useUnicode=true&amp;useSSL=false&amp;serverTimezone=UTC</span></span><br><span class="line">db.user<span class="number">.0</span>=root</span><br><span class="line">db.password<span class="number">.0</span>=bohu0812</span><br><span class="line"><span class="number">7</span>：停止并重启nacos</span><br><span class="line">docker stop nacos   <span class="comment">//停止  docker restart nacos 重启</span></span><br><span class="line"><span class="number">8</span>：docker logs nacos 查看启动日志    </span><br></pre></td></tr></table></figure>
+
+<h2 id="六：seata"><a href="#六：seata" class="headerlink" title="六：seata"></a>六：seata</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">1：docker</span> <span class="string">pull seataio/seata-server:1.6.0-SNAPSHOT  下载</span></span><br><span class="line"><span class="attr">2：创建容器并启动</span></span><br><span class="line">     <span class="meta">//docker</span> <span class="string">run --name seata-server -p 8091:8091 -p 7091:7091 seataio/seata-server:1.6.0-SNAPSHOT</span></span><br><span class="line">     <span class="attr">不使用自定义配置文件创建、启动</span></span><br><span class="line">     <span class="attr">docker</span> <span class="string">run --name seata-server \</span></span><br><span class="line"><span class="string">     -p 8091:8091 \</span></span><br><span class="line"><span class="string">     -e SEATA_IP=192.168.1.126 \</span></span><br><span class="line"><span class="string">     -e SEATA_PORT=8091 \</span></span><br><span class="line"><span class="string">     docker.io/seataio/seata-server:1.6.0-SNAPSHOT  </span></span><br><span class="line">    <span class="meta">修改配置启动(目录自定义)</span>  <span class="string">15 以上</span></span><br><span class="line">    <span class="meta">启动容器</span> <span class="string">进入容器  resources目录下修改 application.yml</span></span><br><span class="line"><span class="attr">seata</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">config</span>:<span class="string"></span></span><br><span class="line"><span class="comment">    # support: nacos, consul, apollo, zk, etcd3</span></span><br><span class="line">    <span class="attr">type</span>: <span class="string">nacos</span></span><br><span class="line">    <span class="attr">nacos</span>:<span class="string"></span></span><br><span class="line">      <span class="meta">server-addr</span>: <span class="string">nacos:8848</span></span><br><span class="line">      <span class="attr">namespace</span>: <span class="string">abec0c92-a3eb-4baf-9b24-4fff0c3cf6bb</span></span><br><span class="line">      <span class="attr">group</span>: <span class="string">DEFAULT_GROUP</span></span><br><span class="line">      <span class="attr">username</span>: <span class="string">nacos</span></span><br><span class="line">      <span class="attr">password</span>: <span class="string">nacos</span></span><br><span class="line">      <span class="meta">data-id</span>: <span class="string">seataServer.properties     //db配置文件</span></span><br><span class="line">  <span class="attr">registry</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">type</span>: <span class="string">nacos</span></span><br><span class="line">    <span class="attr">nacos</span>:<span class="string"></span></span><br><span class="line">      <span class="attr">application</span>: <span class="string">seata-server</span></span><br><span class="line">      <span class="meta">server-addr</span>: <span class="string">nacos:8848</span></span><br><span class="line">      <span class="attr">group</span>: <span class="string">DEFAULT_GROUP</span></span><br><span class="line">      <span class="attr">namespace</span>: <span class="string">abec0c92-a3eb-4baf-9b24-4fff0c3cf6bb</span></span><br><span class="line">      <span class="attr">cluster</span>: <span class="string">default</span></span><br><span class="line">      <span class="attr">username</span>: <span class="string">nacos</span></span><br><span class="line">      <span class="attr">password</span>: <span class="string">nacos</span></span><br><span class="line"> <span class="attr">store</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">mode</span>: <span class="string">db</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="meta">创建</span>  <span class="string">seataServer.properties  nacos配置文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">store.mode</span>=<span class="string">db</span></span><br><span class="line"><span class="comment">#-----db-----</span></span><br><span class="line"><span class="meta">store.db.datasource</span>=<span class="string">druid</span></span><br><span class="line"><span class="meta">store.db.dbType</span>=<span class="string">mysql</span></span><br><span class="line"><span class="comment"># 需要根据mysql的版本调整driverClassName</span></span><br><span class="line"><span class="comment"># mysql8及以上版本对应的driver：com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="comment"># mysql8以下版本的driver：com.mysql.jdbc.Driver</span></span><br><span class="line"><span class="meta">store.db.driverClassName</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="meta">store.db.url</span>=<span class="string">jdbc:mysql://192.168.1.126:3306/seata?useUnicode=true&amp;characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true&amp;useSSL=false</span></span><br><span class="line"><span class="meta">store.db.user</span>= <span class="string">root</span></span><br><span class="line"><span class="meta">store.db.password</span>= <span class="string">bohu0812</span></span><br><span class="line"><span class="comment"># 数据库初始连接数</span></span><br><span class="line"><span class="meta">store.db.minConn</span>=<span class="string">1</span></span><br><span class="line"><span class="comment"># 数据库最大连接数</span></span><br><span class="line"><span class="meta">store.db.maxConn</span>=<span class="string">20</span></span><br><span class="line"><span class="comment"># 获取连接时最大等待时间 默认5000，单位毫秒</span></span><br><span class="line"><span class="meta">store.db.maxWait</span>=<span class="string">5000</span></span><br><span class="line"><span class="comment"># 全局事务表名 默认global_table</span></span><br><span class="line"><span class="meta">store.db.globalTable</span>=<span class="string">global_table</span></span><br><span class="line"><span class="comment"># 分支事务表名 默认branch_table</span></span><br><span class="line"><span class="meta">store.db.branchTable</span>=<span class="string">branch_table</span></span><br><span class="line"><span class="comment"># 全局锁表名 默认lock_table</span></span><br><span class="line"><span class="meta">store.db.lockTable</span>=<span class="string">lock_table</span></span><br><span class="line"><span class="comment"># 查询全局事务一次的最大条数 默认100</span></span><br><span class="line"><span class="meta">store.db.queryLimit</span>=<span class="string">100</span></span><br><span class="line"><span class="comment"># undo保留天数 默认7天,log_status=1（附录3）和未正常清理的undo</span></span><br><span class="line"><span class="meta">server.undo.logSaveDays</span>=<span class="string">7</span></span><br><span class="line"><span class="comment"># undo清理线程间隔时间 默认86400000，单位毫秒</span></span><br><span class="line"><span class="meta">server.undo.logDeletePeriod</span>=<span class="string">86400000</span></span><br><span class="line"><span class="comment"># 二阶段提交重试超时时长 单位ms,s,m,h,d,对应毫秒,秒,分,小时,天,默认毫秒。默认值-1表示无限重试</span></span><br><span class="line"><span class="comment"># 公式: timeout&gt;=now-globalTransactionBeginTime,true表示超时则不再重试</span></span><br><span class="line"><span class="comment"># 注: 达到超时时间后将不会做任何重试,有数据不一致风险,除非业务自行可校准数据,否者慎用</span></span><br><span class="line"><span class="meta">server.maxCommitRetryTimeout</span>=<span class="string">-1</span></span><br><span class="line"><span class="comment"># 二阶段回滚重试超时时长</span></span><br><span class="line"><span class="meta">server.maxRollbackRetryTimeout</span>=<span class="string">-1</span></span><br><span class="line"><span class="comment"># 二阶段提交未完成状态全局事务重试提交线程间隔时间 默认1000，单位毫秒</span></span><br><span class="line"><span class="meta">server.recovery.committingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="comment"># 二阶段异步提交状态重试提交线程间隔时间 默认1000，单位毫秒</span></span><br><span class="line"><span class="meta">server.recovery.asynCommittingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="comment"># 二阶段回滚状态重试回滚线程间隔时间  默认1000，单位毫秒</span></span><br><span class="line"><span class="meta">server.recovery.rollbackingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="comment"># 超时状态检测重试线程间隔时间 默认1000，单位毫秒，检测出超时将全局事务置入回滚会话管理器</span></span><br><span class="line"><span class="meta">server.recovery.timeoutRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="attr">重启</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="七：FastDFS"><a href="#七：FastDFS" class="headerlink" title="七：FastDFS"></a>七：FastDFS</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>：docker pull delron/fastdfs </span><br><span class="line"><span class="number">2</span>:构建Tracker容器</span><br><span class="line">     宿主机linux： docker run -d --network=host --name tracker -v /Users/zzs/develop/temp/tracker:<span class="regexp">/var/</span>fdfs delron/fastdfs tracker</span><br><span class="line">     mac/win： docker run -d --name tracker -p <span class="number">22122</span>:<span class="number">22122</span> -v /Users/zzs/develop/temp/tracker:<span class="regexp">/var/</span>fdfs delron/fastdfs tracker</span><br><span class="line">     -v参数将本地的目录与容器中的/<span class="keyword">var</span>/fdfs目录进行挂载。</span><br><span class="line"><span class="number">3</span>：构建Storage容器</span><br><span class="line">    linux：docker run -d --network=host --name storage -e TRACKER_SERVER=ip:<span class="number">22122</span> -v /Users/zzs/develop/temp/storage:<span class="regexp">/var/</span>fdfs -e GROUP_NAME=group1 delron/fastdfs storage</span><br><span class="line">    mac/win： docker run -d --name storage -p <span class="number">8888</span>:<span class="number">8888</span> -p <span class="number">23000</span>:<span class="number">23000</span> -e TRACKER_SERVER=<span class="number">192.168</span><span class="number">.1</span><span class="number">.126</span>:<span class="number">22122</span> -v /Users/zzs/develop/temp/storage:<span class="regexp">/var/</span>fdfs -e GROUP_NAME=group1 delron/fastdfs storage</span><br><span class="line">    其中<span class="number">8888</span>为Nginx对应的访问端口，<span class="number">23000</span>是storage服务端口。</span><br><span class="line"><span class="number">4</span>：配置</span><br><span class="line">docker exec -it storage的id bash</span><br><span class="line">配置文件在/etc/fdfs目录下的storage.conf  </span><br><span class="line"></span><br><span class="line"># the port <span class="keyword">of</span> the web server on <span class="built_in">this</span> storage server</span><br><span class="line">http.server_port=<span class="number">8888</span>    docker镜像中默认监听的是<span class="number">8888</span>端口  可以修改 如果修改为其他端口，对应的Nginx配置也需要修改。</span><br><span class="line">Nginx 配置</span><br><span class="line">/usr/local/nginx/conf/   nginx.conf</span><br><span class="line">server &#123;</span><br><span class="line">    listen       <span class="number">8888</span>;</span><br><span class="line">    server_name  localhost;</span><br><span class="line">    location ~<span class="regexp">/group[0-9]/</span> &#123;</span><br><span class="line">        ngx_fastdfs_module;</span><br><span class="line">    &#125;</span><br><span class="line">    error_page   <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span>  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">5</span>：测试  将一张图片放入  /Users/zzs/develop/temp/storage   构建Storage容器的位置</span><br><span class="line">进入storage容器，进入/<span class="keyword">var</span>/fdfs目录，执行如下命令：</span><br><span class="line">/usr/bin/fdfs_upload_file /etc/fdfs/client.conf 图片全名带后缀</span><br><span class="line">得到：group1/M00/<span class="number">00</span>/<span class="number">00</span>/rBEADWNoOIWAel16AAROVIeAJlo406.png</span><br><span class="line">此时，文件已经上传成功，会返回在storage存储文件的路径信息</span><br><span class="line"></span><br><span class="line"><span class="attr">http</span>:<span class="comment">//192.168.1.126:8888/group1/M00/00/00/rBEADWNoOIWAel16AAROVIeAJlo406.png </span></span><br></pre></td></tr></table></figure>
+
+
+</article>
+
+    <div class="pagenator post-pagenator">
+    
+    
+        <a class="extend prev post-prev" href="/2022/11/18/nacos%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8/">上一篇</a>
+    
+
+    
+    <p>上次更新 2022-11-18</p>
+    
+    
+        <a class="extend next post-next" href="/2021/08/15/Centos%208/">下一篇</a>
+    
+    </div>
+
+    </div>
+    <div class="footer">
+        <div class="container">
+    <div class="social">
+	<ul class="social-list">
+		
+			
+				
+				
+				<li>
+					<a href="mailto:shenbohu@gmail.com" title="email" target="_blank">
+					<i class="fa fa-email"></i>
+					</a>
+				</li>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+				
+				<li>
+					<a href="https://github.com/shenbohu" title="github" target="_self">
+					<i class="fa fa-github"></i>
+					</a>
+				</li>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+				
+				<li>
+					<a href="https://www.jianshu.com/u/a7d51251e8df" title="jianshu" target="_self">
+					<i class="fa fa-jianshu"></i>
+					</a>
+				</li>
+			
+		
+			
+		
+			
+		
+			
+		
+	</ul>
+</div>
+    <div class="copyright">
+        <span>
+            
+            
+            
+                © 申博虎 2021 - 2022
+            
+        </span>
+    </div>
+    <div class="power">
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/CaiChenghan/iLiKE">iLiKE Theme</a>
+        </span>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <!--page counter part-->
+<script>
+function addCount (Counter) {
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query = new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find({
+        success: function(results) {
+            if (results.length>0) {
+                var counter=results[0];
+                counter.fetchWhenSave(true); //get recent result
+                counter.increment("time");
+                counter.save();
+            } else {
+                var newcounter=new Counter();
+                newcounter.set("title",title);
+                newcounter.set("url",url);
+                newcounter.set("time",1);
+                newcounter.save(null,{
+                    success: function(newcounter) {
+                        //alert('New object created');
+                    }, error: function(newcounter,error) {
+                        alert('Failed to create');
+                    }
+                })
+            }
+        },
+        error: function(error) {
+            //find null is not a error
+            alert('Error:'+error.code+" "+error.message);
+        }
+    });
+}
+$(function() {
+    var Counter=AV.Object.extend("Counter");
+    //only increse visit counting when intering a page
+    if ($('.article-title').length == 1) {
+       addCount(Counter);
+    }
+    var query=new AV.Query(Counter);
+    query.descending("time");
+    // the sum of popular posts
+    query.limit(10); 
+    query.find({
+        success: function(results) {
+                for(var i=0;i<results.length;i++) {
+                    var counter=results[i];
+                    title=counter.get("title");
+                    url=counter.get("url");
+                    time=counter.get("time");
+                    // add to the popularlist widget
+                    showcontent=title+" ("+time+")";
+                    //notice the "" in href
+                    $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                }
+            },
+        error: function(error) {
+            alert("Error:"+error.code+" "+error.message);
+        }
+    });
+});
+</script>
+</div>
+    </div>
+</body>
+</html>

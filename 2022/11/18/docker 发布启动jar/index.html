@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <title>Category: Linux [ 我是猪的博客 ]</title>
+  <title>docker 发布启动jar [ 我是猪的博客 ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -55,57 +55,28 @@
 </div>
     </div>
     <div class="container">
-        
-<div id="category">
-  <h1>Linux</h1>
-  
-    <div class="category-item">
-      
-        <a href="/2022/11/18/Anolis%20OS/">
-          Anolis OS7.9 配置
-        </a>
-      
-      <time datetime="2022-11-18T00:15:16.000Z">
-        2022-11-18
-      </time>
-    </div>
-  
-    <div class="category-item">
-      
-        <a href="/2022/11/18/docker%20%E5%8F%91%E5%B8%83%E5%90%AF%E5%8A%A8jar/">
-          docker 发布启动jar
-        </a>
-      
-      <time datetime="2022-11-18T00:15:16.000Z">
-        2022-11-18
-      </time>
-    </div>
-  
-    <div class="category-item">
-      
-        <a href="/2022/11/18/nacos%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8/">
-          nacos 配置中心使用
-        </a>
-      
-      <time datetime="2022-11-18T00:15:16.000Z">
-        2022-11-18
-      </time>
-    </div>
-  
-    <div class="category-item">
-      
-        <a href="/2021/08/15/Centos%208/">
-          Centos 8 配置
-        </a>
-      
-      <time datetime="2021-08-15T00:15:16.000Z">
-        2021-08-15
-      </time>
-    </div>
-  
-</div>
+        <h1 class="post-title">docker 发布启动jar</h1>
+<article class="post markdown-style">
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1:上传jar到指定目录 在该目录下创建Dockerfile 文件</span><br><span class="line">2：</span><br><span class="line">FROM java:8</span><br><span class="line">MAINTAINER bohu</span><br><span class="line">ADD gateway-1.0-SNAPSHOT.jar gateway.jar</span><br><span class="line">EXPOSE 8001</span><br><span class="line">ENTRYPOINT [&quot;java&quot;,&quot;-Dfile.encoding=utf-8&quot;,&quot;-jar&quot;,&quot;data/gateway-1.0-SNAPSHOT.jar&quot;]</span><br><span class="line">## data/gateway-1.0-SNAPSHOT.jar 指定当前目录下 gateway-1.0-SNAPSHOT.jar 文件</span><br><span class="line">3：创建镜像文件  docker build -t gateway:1.0.0 .     注意：后面的  . </span><br><span class="line">4：将容器目录与宿主机目录进行关联     </span><br><span class="line">  docker run --name gateway -it -v /usr/local/docker/jar:/data -d -p 8001:8001 gateway:1.01</span><br><span class="line">  --name为指定容器的名称 -v 宿主机目录关联容器目录  -p指定容器暴露的端口</span><br><span class="line">5：每次更新替换jar即可</span><br><span class="line">6、然后docker stop启动的容器，然后再docker start容器就可以了   </span><br></pre></td></tr></table></figure>
 
 
+
+
+</article>
+
+    <div class="pagenator post-pagenator">
+    
+    
+        <a class="extend prev post-prev" href="/2022/11/18/Nacos%E7%AD%89%E8%AE%BE%E7%BD%AE%E4%B8%BAwindows%E8%87%AA%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1/">上一篇</a>
+    
+
+    
+    <p>上次更新 2022-11-18</p>
+    
+    
+        <a class="extend next post-next" href="/2022/11/18/nacos%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8/">下一篇</a>
+    
+    </div>
 
     </div>
     <div class="footer">

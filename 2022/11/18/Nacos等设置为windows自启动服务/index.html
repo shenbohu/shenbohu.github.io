@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   
-  <title>Category: Linux [ 我是猪的博客 ]</title>
+  <title>Nacos等设置为windows自启动服务 [ 我是猪的博客 ]</title>
   
     <!-- stylesheets list from config.yml -->
     
@@ -55,57 +55,26 @@
 </div>
     </div>
     <div class="container">
-        
-<div id="category">
-  <h1>Linux</h1>
-  
-    <div class="category-item">
-      
-        <a href="/2022/11/18/Anolis%20OS/">
-          Anolis OS7.9 配置
-        </a>
-      
-      <time datetime="2022-11-18T00:15:16.000Z">
-        2022-11-18
-      </time>
-    </div>
-  
-    <div class="category-item">
-      
-        <a href="/2022/11/18/docker%20%E5%8F%91%E5%B8%83%E5%90%AF%E5%8A%A8jar/">
-          docker 发布启动jar
-        </a>
-      
-      <time datetime="2022-11-18T00:15:16.000Z">
-        2022-11-18
-      </time>
-    </div>
-  
-    <div class="category-item">
-      
-        <a href="/2022/11/18/nacos%20%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E4%BD%BF%E7%94%A8/">
-          nacos 配置中心使用
-        </a>
-      
-      <time datetime="2022-11-18T00:15:16.000Z">
-        2022-11-18
-      </time>
-    </div>
-  
-    <div class="category-item">
-      
-        <a href="/2021/08/15/Centos%208/">
-          Centos 8 配置
-        </a>
-      
-      <time datetime="2021-08-15T00:15:16.000Z">
-        2021-08-15
-      </time>
-    </div>
-  
-</div>
+        <h1 class="post-title">Nacos等设置为windows自启动服务</h1>
+<article class="post markdown-style">
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>:下载WinSW https:<span class="comment">//www.aliyundrive.com/s/eXPRJq7tR9C</span></span><br><span class="line"><span class="number">2</span>：在nacos的bin目录下，将下载的winsw.exe拷贝到此目录下，并重命名为NacosWinService.exe（其他服务同理）</span><br><span class="line"><span class="number">3</span>：在nacos的bin目录下新建配置文件NacosWinService.xml，写入服务的相关配置：</span><br><span class="line"> nacos：   &lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="line">    &lt;service&gt;</span><br><span class="line">      &lt;id&gt;NacosWinService&lt;/id&gt;</span><br><span class="line">      &lt;name&gt;NacosWinService&lt;/name&gt;</span><br><span class="line">      &lt;description&gt;NacosWinService&lt;/description&gt;</span><br><span class="line">      &lt;executable&gt;%BASE%\startup.cmd&lt;/executable&gt;</span><br><span class="line">      &lt;arguments&gt;-m standalone&lt;/arguments&gt;</span><br><span class="line">      &lt;logpath&gt;%BASE%\serviceLogs&lt;/logpath&gt;</span><br><span class="line">    &lt;/service&gt;</span><br><span class="line"></span><br><span class="line">seata    &lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="line">    &lt;service&gt;</span><br><span class="line">      &lt;id&gt;SeataWinService&lt;/id&gt;</span><br><span class="line">      &lt;name&gt;SeataWinService&lt;/name&gt;</span><br><span class="line">      &lt;description&gt;NacosWinService&lt;/description&gt;</span><br><span class="line">      &lt;executable&gt;%BASE%\seata-server.bat&lt;/executable&gt;</span><br><span class="line">      &lt;logpath&gt;%BASE%\serviceLogs&lt;/logpath&gt;</span><br><span class="line">    &lt;/service&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">startup.cmd 启动脚本名称 serviceLogs 日志目录 </span><br><span class="line"><span class="number">4</span>：以管理员权限cmd到nacos的bin目录，执行以下命令：</span><br><span class="line">安装服务：NacosWinService.exe install</span><br><span class="line">启动服务：net start NacosWinService</span><br><span class="line"><span class="number">5</span>：停止服务</span><br><span class="line">net stop NacosWinService   或者直接去win服务管理停止</span><br><span class="line"><span class="number">6</span>：卸载</span><br><span class="line">NacosWinService.exe uninstall</span><br></pre></td></tr></table></figure>
 
 
+</article>
+
+    <div class="pagenator post-pagenator">
+    
+    
+        <a class="extend prev post-prev" href="/2022/11/18/Anolis%20OS/">上一篇</a>
+    
+
+    
+    <p>上次更新 2022-11-18</p>
+    
+    
+        <a class="extend next post-next" href="/2022/11/18/docker%20%E5%8F%91%E5%B8%83%E5%90%AF%E5%8A%A8jar/">下一篇</a>
+    
+    </div>
 
     </div>
     <div class="footer">
