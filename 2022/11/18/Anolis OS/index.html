@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+  <title>Anolis OS7.9 配置 [ 我是猪的博客 ]</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/iLiKE.css">
+    
+  
+  
+  
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+    <script id="leancloud">
+      AV.init({
+          appId: "6E5zTbTljdUbVW2WkXPsXGJk-gzGzoHsz",
+          appKey: "0vsyDKfNpeSECAI70J794ugv"
+      });
+    </script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="header">
+        <div class="container">
+    <div class="menu">
+      <div class="menu-left">
+        <a href="/">
+          <img src="/favicon.ico"></img>
+        </a>
+      </div>
+      <div class="menu-right">
+        
+          
+          
+          
+          
+          
+          
+          <a href="/">首页</a>
+        
+          
+          
+          
+          
+          
+          
+          <a href="/archives">归档</a>
+        
+      </div>
+    </div>
+</div>
+    </div>
+    <div class="container">
+        <h1 class="post-title">Anolis OS7.9 配置</h1>
+<article class="post markdown-style">
+  <h2 id="一：查看宿主机的网络环境-配置网络"><a href="#一：查看宿主机的网络环境-配置网络" class="headerlink" title="一：查看宿主机的网络环境/配置网络"></a>一：查看宿主机的网络环境/配置网络</h2><p>注意： 虚拟机网路选择  桥接方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1.进入配置文件目录 找到ifcfg-ens33 (文件名不统一 前缀是ifcfg- 就行)</span><br><span class="line">cd /etc/sysconfig/network-scripts/</span><br><span class="line">2.编辑配置文件  </span><br><span class="line">vi ifcfg-ens33    </span><br><span class="line">  修改：将BOOTPROTO=dhcp 修改为 BOOTPROTO=static  意思是IP设置为固定的</span><br><span class="line">       将ONBOOT=no 修改为ONBOOT=yes</span><br><span class="line">  添加：IPADDR=192.168.1.126</span><br><span class="line">       ENTWORK=192.168.1.1</span><br><span class="line">       NETSTAT=255.255.255.0</span><br><span class="line">       GATEWAY=192.168.1.1</span><br><span class="line">       DNS1=192.168.1.1</span><br><span class="line">       DNS2=8.8.8.8</span><br><span class="line"> nmcli c reload   //重新载入配置文件 </span><br><span class="line">3.重启网卡（3个都可以ens33 为上述配置文件后缀  ）  </span><br><span class="line">nmcli c up ens33</span><br><span class="line">nmcli d reapply ens33</span><br><span class="line">nmcli d connect ens33</span><br><span class="line"></span><br><span class="line">查看网络 ip  addr</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二：安装docker（可在dacker网站查询可以安装的各种版本-https-hub-docker-com-）"><a href="#二：安装docker（可在dacker网站查询可以安装的各种版本-https-hub-docker-com-）" class="headerlink" title="二：安装docker（可在dacker网站查询可以安装的各种版本 https://hub.docker.com/）"></a>二：安装docker（可在dacker网站查询可以安装的各种版本 <a target="_blank" rel="noopener" href="https://hub.docker.com/%EF%BC%89">https://hub.docker.com/）</a></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">1.移除旧版本</span><br><span class="line">sudo yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-selinux \</span><br><span class="line">                  docker-engine-selinux \</span><br><span class="line">                  docker-engine</span><br><span class="line">2.系统工具 </span><br><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">3.添加软件源信息</span><br><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">4.更新yum命令</span><br><span class="line">centos7：sudo yum makecache fast</span><br><span class="line">centos8：sudo yum makecache</span><br><span class="line">5.安装docker</span><br><span class="line">sudo yum -y install docker-ce   //最新</span><br><span class="line">sudo  yum install -y docker-ce-18.09.7 docker-ce-cli-18.09.7 containerd.io  指定</span><br><span class="line">6.启动docker后台</span><br><span class="line">sudo systemctl start docker // 设置开机自启</span><br><span class="line">sudo systemctl enable docker</span><br><span class="line">其他：</span><br><span class="line">sudo systemctl stop docker // 停止</span><br><span class="line">sudo systemctl restart docker // 重启</span><br><span class="line">sudo systemctl status docker // 查看状态</span><br><span class="line">sudo systemctl enable docker // 设置开机自启</span><br><span class="line">sudo systemctl disable docker // 取消开机自启</span><br><span class="line">sudo systemctl is-enabled docker // 查看是否已经配置开机自启</span><br><span class="line">docker -v //查看版本</span><br></pre></td></tr></table></figure>
+
+<h2 id="三：-Docker运行Nginx"><a href="#三：-Docker运行Nginx" class="headerlink" title="三： Docker运行Nginx"></a>三： Docker运行Nginx</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:80 nginx  //启动</span><br><span class="line">浏览器输入：http://192.168.1.126  //测试</span><br></pre></td></tr></table></figure>
+
+
+</article>
+
+    <div class="pagenator post-pagenator">
+    
+    
+
+    
+    <p>上次更新 2022-11-18</p>
+    
+    
+        <a class="extend next post-next" href="/2021/08/15/Centos%208/">下一篇</a>
+    
+    </div>
+
+    </div>
+    <div class="footer">
+        <div class="container">
+    <div class="social">
+	<ul class="social-list">
+		
+			
+				
+				
+				<li>
+					<a href="mailto:shenbohu@gmail.com" title="email" target="_blank">
+					<i class="fa fa-email"></i>
+					</a>
+				</li>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+				
+				<li>
+					<a href="https://github.com/shenbohu" title="github" target="_self">
+					<i class="fa fa-github"></i>
+					</a>
+				</li>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+				
+				<li>
+					<a href="https://www.jianshu.com/u/a7d51251e8df" title="jianshu" target="_self">
+					<i class="fa fa-jianshu"></i>
+					</a>
+				</li>
+			
+		
+			
+		
+			
+		
+			
+		
+	</ul>
+</div>
+    <div class="copyright">
+        <span>
+            
+            
+            
+                © 申博虎 2021 - 2022
+            
+        </span>
+    </div>
+    <div class="power">
+        <span>
+            Powered by <a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> & <a target="_blank" rel="noopener" href="https://github.com/CaiChenghan/iLiKE">iLiKE Theme</a>
+        </span>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <!--page counter part-->
+<script>
+function addCount (Counter) {
+    url=$('.article-date').attr('href').trim();
+    title = $('.article-title').text().trim();
+    var query = new AV.Query(Counter);
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+    query.find({
+        success: function(results) {
+            if (results.length>0) {
+                var counter=results[0];
+                counter.fetchWhenSave(true); //get recent result
+                counter.increment("time");
+                counter.save();
+            } else {
+                var newcounter=new Counter();
+                newcounter.set("title",title);
+                newcounter.set("url",url);
+                newcounter.set("time",1);
+                newcounter.save(null,{
+                    success: function(newcounter) {
+                        //alert('New object created');
+                    }, error: function(newcounter,error) {
+                        alert('Failed to create');
+                    }
+                })
+            }
+        },
+        error: function(error) {
+            //find null is not a error
+            alert('Error:'+error.code+" "+error.message);
+        }
+    });
+}
+$(function() {
+    var Counter=AV.Object.extend("Counter");
+    //only increse visit counting when intering a page
+    if ($('.article-title').length == 1) {
+       addCount(Counter);
+    }
+    var query=new AV.Query(Counter);
+    query.descending("time");
+    // the sum of popular posts
+    query.limit(10); 
+    query.find({
+        success: function(results) {
+                for(var i=0;i<results.length;i++) {
+                    var counter=results[i];
+                    title=counter.get("title");
+                    url=counter.get("url");
+                    time=counter.get("time");
+                    // add to the popularlist widget
+                    showcontent=title+" ("+time+")";
+                    //notice the "" in href
+                    $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                }
+            },
+        error: function(error) {
+            alert("Error:"+error.code+" "+error.message);
+        }
+    });
+});
+</script>
+</div>
+    </div>
+</body>
+</html>
